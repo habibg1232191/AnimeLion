@@ -1,0 +1,19 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:AnimeLion"
+             x:Class="AnimeLion.App">
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme Mode="Light"/>
+        <StyleInclude Source="avares://AnimeLion/Views/Styles/Style.axaml"/>
+        <StyleInclude Source="avares://AnimeLion/Views/Styles/DefaultStyles.axaml"/>
+        <StyleInclude Source="avares://AnimeLion/Views/Styles/WindowControlingStyles.axaml"/>
+        <StyleInclude Source="avares://AnimeLion/Views/Controls/PopoverSideBar.axaml"/>
+        <StyleInclude Source="avares://AnimeLion/Views/Controls/MImage.axaml"/>
+        <StyleInclude Source="avares://AnimeLion/Views/Controls/RippleEffect.axaml"/>
+        <StyleInclude Source="avares://AnimeLion/Views/Controls/ScrollBar.axaml"/>
+    </Application.Styles>
+</Application>

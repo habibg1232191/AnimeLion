@@ -1,0 +1,154 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:custom="using:AnimeLion.Views.Controls">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+    
+    <Style Selector=":is(Control).Center">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
+    <Style Selector="Grid.TitleBar">
+        <Setter Property="Background" Value="#636363"/>
+    </Style>
+    
+    <Style Selector="Grid.TitleBar > TextBlock.NameApp">
+        <Setter Property="Foreground" Value="#C9C9C9"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
+    <Style Selector="Path.Close">
+        <Setter Property="Fill" Value="#323232"/>
+        <Setter Property="Data" Value="M19 6.41L17.59 5L12 10.59L6.41 5L5
+        6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19
+         17.59L13.41 12L19 6.41Z" />
+    </Style>
+    
+    <Style Selector="Path.Home">
+        <Setter Property="Fill" Value="#323232"/>
+        <Setter Property="Data" Value="M14.5833 29.1667V20.4167H20.4166V29.1667H27.7083V17.5H32.0833L17.5
+         4.375L2.91663 17.5H7.29163V29.1667H14.5833Z" />
+        
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Fill" Duration="0:0:0.1"/>
+            </Transitions>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Path.Search">
+        <Setter Property="Fill" Value="#323232"/>
+        <Setter Property="Data" Value="M22.6042 20.4167H21.4521L21.0438 20.0229C22.4729
+         18.3604 23.3333 16.2021 23.3333 13.8542C23.3333 8.61875 19.0896 4.375 13.8542
+         4.375C8.61875 4.375 4.375 8.61875 4.375 13.8542C4.375 19.0896 8.61875 23.3333
+         13.8542 23.3333C16.2021 23.3333 18.3604 22.4729 20.0229 21.0438L20.4167
+         21.4521V22.6042L27.7083 29.8813L29.8813 27.7083L22.6042 20.4167V20.4167ZM13.8542
+         20.4167C10.2229 20.4167 7.29167 17.4854 7.29167 13.8542C7.29167 10.2229 10.2229
+         7.29167 13.8542 7.29167C17.4854 7.29167 20.4167 10.2229 20.4167 13.8542C20.4167
+         17.4854 17.4854 20.4167 13.8542 20.4167Z" />
+        
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Fill" Duration="0:0:0.1"/>
+            </Transitions>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Path.Star">
+        <Setter Property="Fill" Value="#323232"/>
+        <Setter Property="Data" Value="M17.5 25.1854L26.5125 30.625L24.1208 20.3729L32.0833
+         13.475L21.5979 12.5854L17.5 2.91663L13.402 12.5854L2.91663 13.475L10.8791
+         20.3729L8.48746 30.625L17.5 25.1854Z" />
+        
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Fill" Duration="0:0:0.1"/>
+            </Transitions>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Path.Shuffle">
+        <Setter Property="Fill" Value="#323232"/>
+        <Setter Property="Data" Value="M15.4438 13.373L7.88962 5.83337L5.83337 7.88962L13.373
+         15.4292L15.4438 13.373ZM21.1459 5.83337L24.1209 8.80837L5.83337 27.1105L7.88962
+         29.1667L26.1917 10.8792L29.1667 13.8542V5.83337H21.1459ZM21.6271 19.5563L19.5709
+         21.6125L24.1355 26.1771L21.1459 29.1667H29.1667V21.1459L26.1917 24.1209L21.6271
+         19.5563V19.5563Z" />
+         
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Fill" Duration="0:0:0.1"/>
+            </Transitions>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Grid.SideBar StackPanel Viewbox">
+        <Setter Property="Width" Value="32"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Margin" Value="0 0 0 8"/>
+    </Style>
+    
+    <Style Selector="Grid.SideBar StackPanel Border">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Height" Value="48"/>
+    </Style>
+    
+    <!-- <Style Selector="Grid.SideBar StackPanel Border:pointerover"> -->
+    <!--     <Setter Property="Background" Value="#434343"/> -->
+    <!-- </Style> -->
+    
+    <Style Selector="Grid.SideBar StackPanel RadioButton">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0"/>
+        
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ContentPresenter Name="PART_ContentPresenter"
+                                  Content="{TemplateBinding Content}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="Grid.SideBar StackPanel RadioButton custom|RippleEffect">
+        <Setter Property="RippleFill" Value="#000"/>
+        <Setter Property="RippleOpacity" Value="0.1"/>
+    </Style>
+    
+    <Style Selector="Grid.SideBar StackPanel RadioButton:checked Path">
+        <Setter Property="Fill" Value="#08004e"/>
+    </Style>
+    
+    <Style Selector="Grid.TitleBarIcon,Grid.TitleBarIconClose">
+        <Setter Property="Background" Value="#ff636363"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.08"/>
+            </Transitions>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Grid.TitleBarIconClose:pointerover">
+        <Setter Property="Background" Value="#ff3636"/>
+    </Style>
+    
+    <Style Selector="Grid.TitleBarIcon:pointerover">
+        <Setter Property="Background" Value="#747474"/>
+    </Style>
+    
+    <Style Selector="Grid.TitleBarIcon Viewbox">
+        <Setter Property="Width" Value="18"/>
+        <Setter Property="Height" Value="18"/>
+        <Setter Property="Margin" Value="5 0 10 0"/>
+    </Style>
+    
+    <Style Selector="Grid.TitleBarIcon Viewbox Path">
+        <Setter Property="Margin" Value="0 "/>
+    </Style>
+</Styles>

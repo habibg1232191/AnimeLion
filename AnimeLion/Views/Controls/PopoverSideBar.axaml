@@ -1,0 +1,54 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:AnimeLion.Views.Controls">
+    <Design.PreviewWith>
+        <controls:PopoverSideBar />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|PopoverSideBar">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid>
+                    <ContentPresenter
+                        Name="PART_ContentPresenter"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                    
+                    <Popup PlacementTarget="PART_ContentPresenter"
+                           Name="TooltipPopup" IsOpen="False" 
+                           WindowManagerAddShadowHint="False"
+                           Topmost="False">
+                        <Border Opacity="0" Height="24" Classes="TooltipSideBar" Name="TooltipBorder">
+                            <TextBlock Text="{TemplateBinding TextTooltip}"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </Popup>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Border.TooltipSideBar">
+        <Setter Property="Transitions">
+            <Transitions>
+                <DoubleTransition Property="Opacity" Duration="0:0:0.1"/>
+            </Transitions>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Border.TooltipSideBar">
+        <Setter Property="Background" Value="#515151"/>
+        <Setter Property="Padding" Value="6 2"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="BoxShadow" Value="0 0 5 -2 #000"/>
+    </Style>
+    
+    <Style Selector="Border.TooltipSideBar TextBlock">
+        <Setter Property="Foreground" Value="#bebebe"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+    
+    <Style Selector="Popup.TooltipPopup">
+        
+    </Style>
+</Styles>

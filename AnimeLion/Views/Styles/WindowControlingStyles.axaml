@@ -1,0 +1,54 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="Grid.SizedWindowGrid">
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+    
+    <Style Selector="Window[WindowState=Maximized] Grid.SizedWindowGrid">
+        <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="IsEnabled" Value="False"/>
+    </Style>
+    
+    <Style Selector="Window[WindowState=Maximized] Panel > Border#PART_Border">
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+    
+    <Style Selector="Window Panel > Border#PART_Border">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="BoxShadow" Value="0 0 5 -2 #000"/>
+    </Style>
+    
+    <Style Selector="Window:not(Window[WindowState=Maximized]) Grid.LeftSized">
+        <Setter Property="Cursor" Value="SizeWestEast"/>
+    </Style>
+    <Style Selector="Window:not(Window[WindowState=Maximized]) Grid.RightSized">
+        <Setter Property="Cursor" Value="SizeWestEast"/>
+    </Style>
+    <Style Selector="Window:not(Window[WindowState=Maximized]) Grid.TopSized">
+        <Setter Property="Cursor" Value="SizeNorthSouth"/>
+    </Style>
+    <Style Selector="Window:not(Window[WindowState=Maximized]) Grid.BottomSized">
+        <Setter Property="Cursor" Value="SizeNorthSouth"/>
+    </Style>
+    
+    
+    <Style Selector="Window:not(Window[WindowState=Maximized]) Grid.ResizeLeftTopWindow">
+        <Setter Property="Cursor" Value="SizeAll"/>
+    </Style>
+    <Style Selector="Window:not(Window[WindowState=Maximized]) Grid.ResizeRightTopWindow">
+        <Setter Property="Cursor" Value="SizeAll"/>
+    </Style>
+    <Style Selector="Window:not(Window[WindowState=Maximized]) Grid.ResizeRightBottomWindow">
+        <Setter Property="Cursor" Value="SizeAll"/>
+    </Style>
+    <Style Selector="Window:not(Window[WindowState=Maximized]) Grid.ResizeLeftBottomWindow">
+        <Setter Property="Cursor" Value="SizeAll"/>
+    </Style>
+    
+</Styles>

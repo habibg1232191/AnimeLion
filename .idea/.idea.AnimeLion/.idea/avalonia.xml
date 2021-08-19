@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="AnimeLion/App.axaml" value="AnimeLion/AnimeLion.csproj" />
+        <entry key="AnimeLion/Views/Controls/MImage.axaml" value="AnimeLion/AnimeLion.csproj" />
+        <entry key="AnimeLion/Views/Controls/PopoverSideBar.axaml" value="AnimeLion/AnimeLion.csproj" />
+        <entry key="AnimeLion/Views/Controls/RippleEffect.axaml" value="AnimeLion/AnimeLion.csproj" />
+        <entry key="AnimeLion/Views/Controls/ScrollBar.axaml" value="AnimeLion/AnimeLion.csproj" />
+        <entry key="AnimeLion/Views/HomePage.axaml" value="AnimeLion/AnimeLion.csproj" />
+        <entry key="AnimeLion/Views/MainWindow.axaml" value="AnimeLion/AnimeLion.csproj" />
+        <entry key="AnimeLion/Views/Styles/DefaultStyles.axaml" value="AnimeLion/AnimeLion.csproj" />
+        <entry key="AnimeLion/Views/Styles/Style.axaml" value="AnimeLion/AnimeLion.csproj" />
+        <entry key="AnimeLion/Views/Styles/WindowControlingStyles.axaml" value="AnimeLion/AnimeLion.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

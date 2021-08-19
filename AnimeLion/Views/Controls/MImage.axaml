@@ -1,0 +1,57 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:AnimeLion.Views.Controls">
+    <Design.PreviewWith>
+        <controls:MImage />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|MImage">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Canvas Name="PART"
+                      Width="{TemplateBinding Width}"
+                      Height="{TemplateBinding Height}">
+                    <Canvas.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Скачать"/>
+                        </ContextMenu>
+                    </Canvas.ContextMenu>
+                    <Border Name="ControlVisibleWhileLoaded" Margin="0" Background="{TemplateBinding Background}"/>
+                    <Image Name="Image"
+                           Opacity="0"
+                           Width="{TemplateBinding Width}"
+                           Height="{TemplateBinding Height}"
+                           Source="{TemplateBinding Source}"
+                           Stretch="{TemplateBinding Stretch}"
+                           RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                </Canvas>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|MImage/template/Canvas > ContentPresenter, controls|MImage/template/Canvas > Image#Image">
+        <Setter Property="Transitions">
+            <Transitions>
+                <DoubleTransition Property="Opacity" Easing="CubicEaseOut" Duration="0:0:0.3"/>
+            </Transitions>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|MImage Border#ControlVisibleWhileLoaded">
+        <Setter Property="Background" Value="#000"/>
+        <!-- <Style.Animations> -->
+        <!--     <Animation Duration="0:0:1" Easing="CubicEaseOut" IterationCount="INFINITE"> -->
+        <!--         <KeyFrame Cue="0%"> -->
+        <!--             <Setter Property="Background" Value="#000"/> -->
+        <!--         </KeyFrame> -->
+        <!--         <KeyFrame Cue="50%"> -->
+        <!--             <Setter Property="Background" Value="#1e1e1e"/> -->
+        <!--         </KeyFrame> -->
+        <!--         <KeyFrame Cue="100%"> -->
+        <!--             <Setter Property="Background" Value="#000"/> -->
+        <!--         </KeyFrame> -->
+        <!--     </Animation> -->
+        <!-- </Style.Animations> -->
+    </Style>
+</Styles>

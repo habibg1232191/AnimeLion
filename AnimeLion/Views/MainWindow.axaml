@@ -1,0 +1,191 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AnimeLion.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:custom="using:AnimeLion.Views.Controls"
+        xmlns:convertes="using:AnimeLion.Converters"
+        xmlns:reactiveUi="http://reactiveui.net"
+        x:Class="AnimeLion.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        TransparencyLevelHint="Transparent"
+        Background="Transparent"
+        SystemDecorations="None"
+        MinWidth="870"
+        MinHeight="500"
+        Title="AnimeLion">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <Window.KeyBindings>
+        <KeyBinding Gesture="CTRL + H" Command="{Binding Home}"/>
+        <KeyBinding Gesture="CTRL + NumPad1" Command="{Binding Test}"/>
+    </Window.KeyBindings>
+    
+    <Window.Resources>
+        <convertes:Minus30 x:Key="Minus30"/>
+    </Window.Resources>
+
+    <Panel>
+        <Border Name="PART_Border">
+            <Grid RowDefinitions="27 *" Background="#3a3a3a" Name="PART_Content">
+                <Grid Classes="TitleBar" PointerPressed="WindowMoved" Row="0" DoubleTapped="MaximizedWindow">
+                <TextBlock Classes="NameApp" Text="AnimeLion" />
+                
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Grid Classes="TitleBarIcon">
+                        <Button Click="HideWindow"
+                                Height="{Binding $parent.Bounds.Height}">
+                            <Border Width="18" Height="3" Background="#323232" Classes="Center" Margin="5 0"/>
+                        </Button>
+                    </Grid>
+                    <Grid Classes="TitleBarIcon">
+                        <Button Click="MaximizedWindow">
+                            <Border Classes="Center" Width="14" Height="14" Margin="7 0"
+                                BorderThickness="2" BorderBrush="#323232" Background="Transparent"/>
+                        </Button>
+                    </Grid>
+                    <Grid Classes="TitleBarIconClose">
+                        <Button Click="CloseWindow" Margin="0 0 7 4">
+                            <Viewbox Classes="Center">
+                                <Path Classes="Close"/>
+                            </Viewbox>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+                <Grid
+                Row="1"
+                ColumnDefinitions="37, *">
+                    <Grid
+                        Column="0" 
+                        ColumnDefinitions="0"
+                        Background="#4f4f4f"
+                        Classes="SideBar">
+                        <StackPanel Orientation="Vertical" Classes="Center" Margin="18 0 0 0"
+                                Width="{Binding $parent.Bounds.Width}">
+                            <RadioButton Command="{Binding Home}"
+                                         Width="{Binding $parent.Bounds.Width}" IsChecked="True">
+                                <custom:PopoverSideBar TextTooltip="Главная">
+                                    <Border>
+                                        <custom:RippleEffect>
+                                            <Viewbox Margin="0,4,0,12">
+                                                <Path Classes="Home"/>
+                                            </Viewbox>
+                                        </custom:RippleEffect>
+                                    </Border>
+                                </custom:PopoverSideBar>
+                            </RadioButton>
+                            
+                            <RadioButton Width="{Binding $parent.Bounds.Width}">
+                                <custom:PopoverSideBar TextTooltip="В разработке">
+                                    <Border>
+                                        <custom:RippleEffect>
+                                            <Viewbox Margin="0,4,0,9">
+                                                <Path Classes="Search"/>
+                                            </Viewbox>
+                                        </custom:RippleEffect>
+                                    </Border>
+                                </custom:PopoverSideBar>
+                            </RadioButton>
+                            
+                            <RadioButton Width="{Binding $parent.Bounds.Width}">
+                                <custom:PopoverSideBar TextTooltip="В разработке">
+                                    <Border>
+                                        <custom:RippleEffect>
+                                            <Viewbox Margin="0,4,0,10">
+                                                <Path Classes="Star"/>
+                                            </Viewbox>
+                                        </custom:RippleEffect>
+                                    </Border>
+                                </custom:PopoverSideBar>
+                            </RadioButton>
+                            
+                            <RadioButton Width="{Binding $parent.Bounds.Width}">
+                                <custom:PopoverSideBar TextTooltip="В разработке">
+                                    <Border>
+                                        <custom:RippleEffect>
+                                            <Viewbox Margin="-5,4,0,10">
+                                                <Path Classes="Shuffle"/>
+                                            </Viewbox>
+                                        </custom:RippleEffect>
+                                    </Border>
+                                </custom:PopoverSideBar>
+                            </RadioButton>
+                        </StackPanel>
+                    </Grid>
+                
+                    <reactiveUi:ViewModelViewHost Grid.Column="1" ViewModel="{Binding CurrentPage}">
+                        
+                    </reactiveUi:ViewModelViewHost>
+                </Grid>
+            </Grid>
+        </Border>
+        
+        <Grid 
+            Classes="LeftSized SizedWindowGrid"
+            Name="ResizeLeftWindow"
+            Width="5" 
+            Height="{Binding $parent.Bounds.Height, Converter={StaticResource Minus30}}"
+            HorizontalAlignment="Left"
+            PointerPressed="ResizedWindow"/>
+        <Grid 
+            Classes="RightSized SizedWindowGrid"
+            Name="ResizeRightWindow"
+            Width="5" 
+            Height="{Binding $parent.Bounds.Height, Converter={StaticResource Minus30}}"
+            HorizontalAlignment="Right"
+            PointerPressed="ResizedWindow"/>
+        <Grid
+            Classes="TopSized SizedWindowGrid"
+            Name="ResizeTopWindow"
+            Width="{Binding $parent.Bounds.Width, Converter={StaticResource Minus30}}" 
+            Height="5"
+            VerticalAlignment="Top"
+            PointerPressed="ResizedWindow"/>
+        <Grid
+            Classes="BottomSized SizedWindowGrid"
+            Name="ResizeBottomWindow"
+            Width="{Binding $parent.Bounds.Width, Converter={StaticResource Minus30}}"
+            Height="5"
+            VerticalAlignment="Bottom"
+            PointerPressed="ResizedWindow"/>
+        
+        <Grid 
+            Classes="ResizeLeftTopWindow SizedWindowGrid"
+            Name="ResizeLeftTopWindow"
+            Width="5"
+            Height="5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            PointerPressed="ResizedWindow"/>
+        <Grid 
+            Classes="ResizeRightTopWindow SizedWindowGrid"
+            Name="ResizeRightTopWindow"
+            Width="5" 
+            Height="5"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            PointerPressed="ResizedWindow"/>
+        <Grid
+            Classes="ResizeRightBottomWindow SizedWindowGrid"
+            Name="ResizeRightBottomWindow"
+            Width="5" 
+            Height="5"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            PointerPressed="ResizedWindow"/>
+        <Grid
+            Classes="ResizeLeftBottomWindow SizedWindowGrid"
+            Name="ResizeLeftBottomWindow"
+            Width="5" 
+            Height="5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            PointerPressed="ResizedWindow"/>
+    </Panel>
+
+</Window>

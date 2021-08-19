@@ -1,0 +1,62 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:AnimeLion.Views.Controls">
+    <Design.PreviewWith>
+        <controls:RippleEffect />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|RippleEffect">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Background="Transparent"
+                    Width="{TemplateBinding Width}"
+                    Height="{TemplateBinding Height}"
+                    ClipToBounds="True"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+                    <Grid Background="Transparent">
+                        <ContentPresenter
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Content="{TemplateBinding Content}"
+                            Name="Presenter"/>
+                        <Canvas 
+                            Name="RippleCanvas"
+                            Width="{Binding #Presenter.Bounds.Width}"
+                            Height="{Binding #Presenter.Bounds.Height}"/>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|RippleEffect Ellipse.Ripple">
+        <Setter Property="Fill" Value="#000"/>
+        <Setter Property="Opacity" Value="0.1"/>
+    </Style>
+    
+    <Style Selector="Ellipse.Ripple">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <DoubleTransition Property="Opacity" Duration="0:0:0.4"/>
+                <DoubleTransition Property="Width" Duration="0:0:0.8">
+                    <DoubleTransition.Easing>
+                        <SplineEasing X1=".09" X2=".54" Y1="1.19" Y2=".94"/>
+                    </DoubleTransition.Easing>
+                </DoubleTransition>
+                
+                <DoubleTransition Property="Height" Duration="0:0:0.8">
+                    <DoubleTransition.Easing>
+                        <SplineEasing X1=".09" X2=".54" Y1="1.19" Y2=".94"/>
+                    </DoubleTransition.Easing>
+                </DoubleTransition>
+                <ThicknessTransition Property="Margin" Duration="0:0:0.8">
+                    <ThicknessTransition.Easing>
+                        <SplineEasing X1=".09" X2=".54" Y1="1.19" Y2=".94"/>
+                    </ThicknessTransition.Easing>
+                </ThicknessTransition>
+            </Transitions>
+        </Setter>
+    </Style>
+</Styles>
