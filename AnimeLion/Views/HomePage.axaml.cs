@@ -1,11 +1,5 @@
-﻿using System;
-using AnimeLion.ViewModels;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Layout;
+﻿using AnimeLion.ViewModels;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media;
 using Avalonia.ReactiveUI;
 
 namespace AnimeLion.Views
@@ -20,12 +14,6 @@ namespace AnimeLion.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-        }
-
-        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
-        {
-            base.OnApplyTemplate(e);
-            (DataContext as HomePageViewModel)?.Start();
         }
     }
 }

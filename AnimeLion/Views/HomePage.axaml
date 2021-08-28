@@ -2,33 +2,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:convertes="using:AnimeLion.Converters"
              xmlns:vm="using:AnimeLion.ViewModels"
              xmlns:controls="using:AnimeLion.Views.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AnimeLion.Views.HomePage">
     
-    <UserControl.DataContext>
+    <Design.DataContext>
         <vm:HomePageViewModel />
-    </UserControl.DataContext>
+    </Design.DataContext>
+    
+    <UserControl.Resources>
+        <convertes:Minus30 x:Key="Minus30"/>
+        <convertes:ProportionalImage5 x:Key="ProportionalImage5"/>
+    </UserControl.Resources>
     
     <Grid Name="PART_Grid">
-        <controls:ScrollBar VerticalAlignment="Top" ItemWidth="{Binding #PART_Grid.Bounds.Width}">
-            <ListBox Items="{Binding TopAnimeCurrentYears}" IsEnabled="{Binding IsLoadedTopAnimeCurrentYears}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Panel>
-                            <controls:MImage Source="{Binding ImageUrl}"
-                                             Width="{Binding #PART_Grid.Bounds.Width}" Height="400" Stretch="Fill"/>
-                        </Panel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+        <ListBox
+            VerticalAlignment="Top"
+            Items="{Binding TopAnimeCurrentYears}"
+            IsEnabled="{Binding IsLoadedTopAnimeCurrentYears}"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+            ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Panel>
+                        <controls:MImage
+                            Source="{Binding ImageUrl}"
+                            Width="{Binding #PART_Grid.Bounds.Width}"
+                            Height="{Binding #PART_Grid.Bounds.Width, Converter={StaticResource ProportionalImage5}}"
+                            Stretch="Fill"/>
+                    </Panel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-            </ListBox>
-        </controls:ScrollBar>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <controls:ScrollBar/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
     </Grid>
 </UserControl>

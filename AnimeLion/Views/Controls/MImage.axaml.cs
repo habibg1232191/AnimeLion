@@ -10,6 +10,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.LogicalTree;
 using Avalonia.Media;
 using Avalonia.Threading;
+using Avalonia.Win32.WinRT.Composition;
 using CodeProject.Downloader;
 using ReactiveUI;
 using Bitmap = Avalonia.Media.Imaging.Bitmap;
@@ -79,6 +80,7 @@ namespace AnimeLion.Views.Controls
             if (!Directory.Exists(Directory.GetCurrentDirectory() + @"\cache\"))
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\cache\");
             var imgPath = Directory.GetCurrentDirectory() + @"\cache\" + Path.GetFileName(new Uri(Source).AbsolutePath);
+            
             if(isCachedNot)
             {
                 foreach (var bitmapCached in cacheBitmaps)
@@ -113,10 +115,6 @@ namespace AnimeLion.Views.Controls
             partImage.Source = imgPath;
             partImage.Opacity = 1;
             controlPresenter.Opacity = 0;
-            // if (Height > imgPath.Size.Height)
-            //     Height = imgPath.Size.Height;
-            // if (Width > imgPath.Size.Width)
-            //     Width = imgPath.Size.Width;
             IsLoaded = false;
             PseudoClasses.Set(":isloading", false);
         }
@@ -129,10 +127,6 @@ namespace AnimeLion.Views.Controls
             cacheBitmaps.Add(new BitmapCached(imageBitmap, imgPath, size));
             partImage.Opacity = 1;
             controlPresenter.Opacity = 0;
-            // if (Height > imageBitmap.Size.Height)
-            //     Height = imageBitmap.Size.Height;
-            // if (Width > imageBitmap.Size.Width)
-            //     Width = imageBitmap.Size.Width;
             IsLoaded = false;
             PseudoClasses.Set(":isloading", false);
         }

@@ -1,78 +1,111 @@
 ﻿using System;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 
 namespace AnimeLion.Views.Controls
 {
-    public class ScrollBar : ContentControl
+    public class ScrollBar : Panel
     {
-        private Border? _partBorder;
-
-        public static readonly StyledProperty<double> ItemWidthProperty =
-            AvaloniaProperty.Register<RippleEffect, double>(nameof(ItemWidth));
-
-        public double ItemWidth
-        {
-            get => GetValue(ItemWidthProperty);
-            set => SetValue(ItemWidthProperty, value);
-        }
-        
         public ScrollBar()
         {
             AddHandler(PointerWheelChangedEvent, OnPointerWheelChanged,
                 RoutingStrategies.Tunnel | RoutingStrategies.Bubble);
         }
         
-        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
-        {
-            base.OnApplyTemplate(e);
-
-            _partBorder = e.NameScope.Find<Border>("PART_Border");
-        }
-
         private double scrollBarOffsetX = 0;
+	private bool isFirst = true;
 
         private void OnPointerWheelChanged(object? sender, PointerWheelEventArgs e)
         {
             base.OnPointerWheelChanged(e);
-
-            if (_partBorder == null) return;
-            var childBorder = (Control) _partBorder.Child;
-            
-            Console.WriteLine(scrollBarOffsetX);
-            
-            if (e.Delta.Y > 0)
-            {
-                if (-e.Delta.Y * (ItemWidth / 2) - scrollBarOffsetX >= Bounds.Width)
+	    
+	    if(isFirst){
+	        if(e.Delta.Y > 0)
                 {
-                    childBorder.Margin =
-                        new Thickness(Bounds.Width, _partBorder.Margin.Top,
-                            _partBorder.Margin.Right, _partBorder.Margin.Bottom);
-                    scrollBarOffsetX = 0;
-                    return;
+                    if(scrollBarOffsetX + 1 < Children.Count)
+                        scrollBarOffsetX += 1;
                 }
-            }
-            else if (e.Delta.Y < 0)
-            {
-                if (-e.Delta.Y * (ItemWidth / 2) - scrollBarOffsetX <= ItemWidth / 2)
+                else if (e.Delta.Y < 0)
                 {
-                    childBorder.Margin =
-                        new Thickness(0, _partBorder.Margin.Top,
-                            _partBorder.Margin.Right, _partBorder.Margin.Bottom);
-                    scrollBarOffsetX = 0;
-                    return;
+                    if(scrollBarOffsetX - 1 >= 0)
+                        scrollBarOffsetX -= 1;
                 }
+
+                InvalidateArrange();
+            
+                Console.WriteLine(scrollBarOffsetX);
+		isFirst = false;
+	    }else{
+		isFirst = true;
+	    }
+        }
+
+        protected override Size MeasureOverride(Size availableSize)
+        {
+            Size stackDesiredSize = new Size();
+            Size layoutSlotSize = availableSize;
+            
+            layoutSlotSize = layoutSlotSize.WithWidth(Double.PositiveInfinity);
+
+            var children = Children;
+
+            for (int i = 0, count = children.Count; i < count; ++i)
+            {
+                var child = children[i];
+                if (child == null || !child.IsVisible) continue;
+                
+                child.Measure(layoutSlotSize);
+                Size childDesiredSize = child.DesiredSize;
+                
+                stackDesiredSize = stackDesiredSize.WithWidth(stackDesiredSize.Width + childDesiredSize.Width);
+                stackDesiredSize = stackDesiredSize.WithHeight(Math.Max(stackDesiredSize.Height, childDesiredSize.Height));
             }
             
-            scrollBarOffsetX += -e.Delta.Y * (ItemWidth / 2);
+            stackDesiredSize = stackDesiredSize.WithWidth(stackDesiredSize.Width);
             
+            return stackDesiredSize;
+        }
 
-            childBorder.Margin =
-                new Thickness(scrollBarOffsetX, _partBorder.Margin.Top,
-                    _partBorder.Margin.Right, _partBorder.Margin.Bottom);
+        protected override Size ArrangeOverride(Size finalSize)
+        {
+            var children = Children;
+            Rect rcChild = new Rect(finalSize);
+            double previousChildSize = 0.0;
+            double leftSpacing = 0;
+            double xPos = 0;
+            bool isFirst = false;
+            
+            if(scrollBarOffsetX > 0 & scrollBarOffsetX <= children.Count - 1)
+                for (int i = 0; i <= scrollBarOffsetX-1; i++)
+                    leftSpacing += children[i].DesiredSize.Width;
+
+            xPos = -leftSpacing;
+
+            for (int i = 0, count = children.Count; i < count; ++i)
+            {
+                var child = children[i];
+
+                if (child == null || !child.IsVisible) continue;
+                
+                rcChild = rcChild.WithX(xPos);
+                
+                xPos += child.DesiredSize.Width;
+                
+                previousChildSize = child.DesiredSize.Width;
+                rcChild = rcChild.WithWidth(previousChildSize);
+                rcChild = rcChild.WithHeight(Math.Max(finalSize.Height, child.DesiredSize.Height));
+                
+                ArrangeChild(child, rcChild);
+            }
+            
+            return finalSize;
+        }
+        
+        private void ArrangeChild(IControl child, Rect rect)
+        {
+            child.Arrange(rect);
         }
     }
 }

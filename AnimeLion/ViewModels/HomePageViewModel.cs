@@ -29,16 +29,9 @@ namespace AnimeLion.ViewModels
 
         public HomePageViewModel(IScreen? screen = null)
         {
+            Console.WriteLine("HomePageViewModel");
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
-        }
-        
-        public HomePageViewModel()
-        {
             
-        }
-        
-        public void Start()
-        {
             var request = (HttpWebRequest)WebRequest.Create("http://localhost:5000/api/top_anime_current_year");
             
             request.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
@@ -53,6 +46,10 @@ namespace AnimeLion.ViewModels
             IsLoadedTopAnimeCurrentYears = true;
             r.Close();
             stream.Close();
+        }
+        
+        public HomePageViewModel()
+        {
         }
 
         public bool CheckInternet()

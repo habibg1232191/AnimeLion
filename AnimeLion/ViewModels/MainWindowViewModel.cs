@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Windows.Input;
-using Anilist4Net;
-using Avalonia.Input;
 using ReactiveUI;
 
 namespace AnimeLion.ViewModels
 {
     public class MainWindowViewModel : ReactiveObject, IScreen
     {
-        private readonly object _homePage = new HomePageViewModel();
+        private readonly object _homePage;
         private RoutingState _router = new ();
         private object _currentPage;
         
@@ -29,9 +27,15 @@ namespace AnimeLion.ViewModels
             get => _router;
             set => this.RaiseAndSetIfChanged(ref _router, value);
         }
-
+        
         public MainWindowViewModel()
         {
+            
+        }
+
+        public MainWindowViewModel(IScreen? screen = null)
+        {
+            _homePage = new HomePageViewModel(null);
             _currentPage = _homePage;
             Home = ReactiveCommand.Create(() =>
             {

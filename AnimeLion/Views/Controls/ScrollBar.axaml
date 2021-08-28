@@ -4,30 +4,5 @@
     <Design.PreviewWith>
         <controls:ScrollBar />
     </Design.PreviewWith>
-
-    <Style Selector="controls|ScrollBar">
-        <!-- Set Defaults -->
-        <Setter Property="Template">
-            <ControlTemplate>
-                <Border
-                    Name="PART_Border">
-                    <ContentPresenter
-                        Content="{TemplateBinding Content}"
-                        ContentTemplate="{TemplateBinding ContentTemplate}"/>
-                </Border>
-            </ControlTemplate>
-        </Setter>
-    </Style>
     
-    <Style Selector="controls|ScrollBar Border#PART_Border ContentPresenter">
-        <Setter Property="Transitions">
-            <Transitions>
-                <ThicknessTransition Property="Margin" Duration="0:0:0.2">
-                    <ThicknessTransition.Easing>
-                        <CubicEaseOut/>
-                    </ThicknessTransition.Easing>
-                </ThicknessTransition>
-            </Transitions>
-        </Setter>
-    </Style>
 </Styles>

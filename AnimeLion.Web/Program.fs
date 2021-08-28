@@ -89,7 +89,7 @@ let topAnimeCurrentYearHandler =
             }])
         
         connection.Close()
-        json response next ctx
+        json (response|>List.rev) next ctx
 
 let webApp =
     choose [

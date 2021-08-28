@@ -16,10 +16,11 @@ namespace AnimeLion
 
         public override void OnFrameworkInitializationCompleted()
         {
-            Locator.CurrentMutable.RegisterConstant<IScreen>(new MainWindowViewModel());
+            var mainWindowViewModel = new MainWindowViewModel(null);
+            Locator.CurrentMutable.RegisterConstant<IScreen>(mainWindowViewModel);
             Locator.CurrentMutable.Register<IViewFor<HomePageViewModel>>(() => new HomePage());
 
-            new MainWindow{DataContext = new MainWindowViewModel()}.Show();
+            new MainWindow{ DataContext = mainWindowViewModel }.Show();
             base.OnFrameworkInitializationCompleted();
         }
     }
