@@ -12,7 +12,7 @@ dotnet publish "AnimeLion.csproj" -c release -f net5.0 -r win-x64 --self-contain
 ```
 #### For Mac
 ```cmd
-dotnet publish "AnimeLion.csproj" -c release -f net5.0 -r mac-x64 --self-contained
+dotnet publish "AnimeLion.csproj" -c release -f net5.0 -r osx-x64 --self-contained
 ```
 
 #### For Linux
